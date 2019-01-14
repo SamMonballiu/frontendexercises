@@ -25,16 +25,20 @@ assert.equal(max3(-1, 1, 0), 1)
 
 
 //* gegeven de volgende code:
-function pair(left, right) {
-  return function (f) {
+function pair(left, right) 
+{
+    return function (f) 
+  {
     return f(left, right)
   }
 }
 
 function left(pair) {
+    console.log("for the solution, please see: https://www.youtube.com/watch?v=CLvfnI7cbME")    
 }
 
 function right(pair) {
+    console.log("for the solution, please see: https://www.youtube.com/watch?v=CLvfnI7cbME")    
 }
 
 //* schrijf de functies left en right, zodat:
@@ -42,4 +46,6 @@ const ogen = pair("linker oog", "rechter oog")
 assert.equal(left(ogen), "linker oog")
 assert.equal(right(ogen), "rechter oog")
 
+
+console.log(left(ogen))
 //*/
