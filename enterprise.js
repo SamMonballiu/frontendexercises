@@ -7,7 +7,7 @@ const employees = [
   { name: 'Alexander', salary: 3502, freelancer: false },
   { name: 'Els', salary: 3050, freelancer: true },
   { name: 'Igor', salary: 2600, freelancer: true },
-  { name: 'Andne', salary: 2600, freelancer: true },
+  { name: 'Anne', salary: 2600, freelancer: true },
 ]
 
 //* Hoeveel bedraagt de totale loonkost iedere maand?
@@ -66,7 +66,6 @@ function earsMoreThan3k(employees) {
 }
 
 assert.deepEqual(earsMoreThan3k(employees), ['Sandra', 'Alexander', 'Els'])
-
 
 //* Hoeveel verdient een interne medewerker gemiddeld?
 function averageSalaryNonFreeLancer(employees) {

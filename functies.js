@@ -28,16 +28,18 @@ assert.equal(max3(-1, 1, 0), 1)
 function pair(left, right) 
 {
     return function (f) 
-  {
-    return f(left, right)
-  }
+    {
+        return f(left, right)
+    }
 }
 
 function left(pair) {
+    return pair((x,y) => x)
     console.log("for the solution, please see: https://www.youtube.com/watch?v=CLvfnI7cbME")    
 }
 
 function right(pair) {
+    return pair((x,y) => y)
     console.log("for the solution, please see: https://www.youtube.com/watch?v=CLvfnI7cbME")    
 }
 
@@ -45,7 +47,4 @@ function right(pair) {
 const ogen = pair("linker oog", "rechter oog")
 assert.equal(left(ogen), "linker oog")
 assert.equal(right(ogen), "rechter oog")
-
-
-console.log(left(ogen))
 //*/
