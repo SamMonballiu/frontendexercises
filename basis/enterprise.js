@@ -29,19 +29,26 @@ assert.equal(totalSalaries(employees), 20652)
 //* Welke freelancer verdient het meest?
 function bestPaidFreelancer(employees) {
     
-    let bestPaidFreelancer = employees[0];
+    // let bestPaidFreelancer = employees[0];
 
-    for (let i = 0; i < employees.length; i++)
-    {
-        const employee = employees[i];
-        if (employee.freelancer)
-        {
-            if (employee.salary > bestPaidFreelancer.salary)
-            {
-                bestPaidFreelancer = employee;
-            }
-        }
-    }
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     const employee = employees[i];
+    //     if (employee.freelancer)
+    //     {
+    //         if (employee.salary > bestPaidFreelancer.salary)
+    //         {
+    //             bestPaidFreelancer = employee;
+    //         }
+    //     }
+    // }
+    //return bestPaidFreelancer.name;
+    
+    const freelancers = employees.filter(x => x.freelancer);
+    const bestPaidFreelancer = freelancers.reduce(function (prev, current) {
+        return (prev.salary > current.salary) ? prev : current
+     });
+
     return bestPaidFreelancer.name;
 }
 
@@ -71,19 +78,24 @@ assert.deepEqual(earsMoreThan3k(employees), ['Sandra', 'Alexander', 'Els'])
 
 //* Hoeveel verdient een interne medewerker gemiddeld?
 function averageSalaryNonFreeLancer(employees) {
-    let salariesSum = 0;
-    let counter = 0;
+    // let salariesSum = 0;
+    // let counter = 0;
 
-    for (let i = 0; i < employees.length; i++)
-    {
-        if (!employees[i].freelancer)
-        {
-            salariesSum += employees[i].salary;
-            counter++;
-        }
-    }
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     if (!employees[i].freelancer)
+    //     {
+    //         salariesSum += employees[i].salary;
+    //         counter++;
+    //     }
+    // }
 
-    return salariesSum / counter;
+    // return salariesSum / counter;
+
+    const internen = employees.filter(x => !x.freelancer)
+    const reducerino = (x, y) => x + y.salary;
+    const totalSalaris = internen.reduce(reducerino, 0);
+    return totalSalaris / internen.length;
 }
 
 assert.equal(averageSalaryNonFreeLancer(employees), 3134)
