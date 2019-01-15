@@ -50,18 +50,20 @@ assert.equal(bestPaidFreelancer(employees), 'Els')
 
 //* Wie verdient er allemaal meer als 3000?
 function earsMoreThan3k(employees) {
-    const highEarners = []
-    let index = 0;
-    for (let i = 0; i < employees.length; i++)
-    {
-        const employee = employees[i];
-        if (employee.salary > 3000)
-        {
-            highEarners[index] = employee.name;
-            index++;
-        }
-    }
-    return highEarners;
+    // const highEarners = []
+    // let index = 0;
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     const employee = employees[i];
+    //     if (employee.salary > 3000)
+    //     {
+    //         highEarners[index] = employee.name;
+    //         index++;
+    //     }
+    // }
+    // //return highEarners;
+
+    return employees.filter(x => x.salary > 3000).map(x => x.name)
     
 }
 
