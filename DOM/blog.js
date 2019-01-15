@@ -25,20 +25,25 @@ for (let i = 0; i <= articles.length; i++)
 }
 
 function renderArticle(article) {
-  let newArticle = document.createElement("ARTICLE");
-  
-  let heading = document.createElement("h1");
-  heading.appendChild(document.createTextNode(article.title));
-
-  let content = document.createElement("p");
-  content.appendChild(document.createTextNode(article.body));
+  const newArticle = crel("div");
+  const heading = crel("h1", article.title);
+  const content = crel('p', article.body);
+  const section = document.createElement('section');
+  section.appendChild(content);
 
   newArticle.appendChild(heading);
-  newArticle.appendChild(content);
-
-  const title = crel('h1', 'Title test')
-  //const articles = document.getElementById("articles");
-  //articles.appendChild(title);
-  
+  newArticle.appendChild(section);
+  //newArticle.appendChild(content);
   document.getElementById("articles").appendChild(newArticle);
 }
+
+function crel(type, content) {
+  const el = document.createElement(type);
+
+  if (content != null) {
+    el.appendChild(document.createTextNode(content));
+  }
+
+  return el;
+}
+
