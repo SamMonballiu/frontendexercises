@@ -35,6 +35,10 @@ function renderArticle(article) {
 
   newArticle.appendChild(heading);
   newArticle.appendChild(content);
+
+  const title = crel('h1', 'Title test')
+  //const articles = document.getElementById("articles");
+  //articles.appendChild(title);
   
   document.getElementById("articles").appendChild(newArticle);
 }
