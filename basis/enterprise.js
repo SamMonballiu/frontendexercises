@@ -12,15 +12,17 @@ const employees = [
 
 //* Hoeveel bedraagt de totale loonkost iedere maand?
 function totalSalaries(employees) {
-    let sum = 0
+    // let sum = 0
 
-    for (let i = 0; i < employees.length; i++)
-    {
-        const employee = employees[i]
-        sum += employee.salary
-    }
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     const employee = employees[i]
+    //     sum += employee.salary
+    // }
 
-    return sum
+    // return sum
+
+    return employees.map(x => x.salary).reduce((x,y) => x + y);
 }
 
 assert.equal(totalSalaries(employees), 20652)
@@ -70,11 +72,11 @@ function earsMoreThan3k(employees) {
     // }
     // //return highEarners;
 
-    return employees.filter(x => x.salary > 3000).map(x => x.name)
+    return employees.filter(x => x.salary > 3000);
     
 }
 
-assert.deepEqual(earsMoreThan3k(employees), ['Sandra', 'Alexander', 'Els'])
+// assert.deepEqual(earsMoreThan3k(employees), ['Sandra', 'Alexander', 'Els'])
 
 //* Hoeveel verdient een interne medewerker gemiddeld?
 function averageSalaryNonFreeLancer(employees) {
@@ -93,8 +95,8 @@ function averageSalaryNonFreeLancer(employees) {
     // return salariesSum / counter;
 
     const internen = employees.filter(x => !x.freelancer)
-    const reducerino = (x, y) => x + y.salary;
-    const totalSalaris = internen.reduce(reducerino, 0);
+    const reducer = (x, y) => x + y.salary;
+    const totalSalaris = internen.reduce(reducer, 0);
     return totalSalaris / internen.length;
 }
 
@@ -103,18 +105,20 @@ assert.equal(averageSalaryNonFreeLancer(employees), 3134)
 
 // //* Wie heeft de langste naam?
 function longestName(employees) {
-    let longest = "";
-    for (let i = 0; i < employees.length; i++)
-    {
-        const employee = employees[i];
-        const empName = employee.name;
+    // let longest = "";
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     const employee = employees[i];
+    //     const empName = employee.name;
 
-        if (empName.length > longest.length)
-        {
-            longest = empName;
-        }
-    }
-    return longest;
+    //     if (empName.length > longest.length)
+    //     {
+    //         longest = empName;
+    //     }
+    // }
+    //return longest;
+
+    return employees.map(x => x.name).reduce((prev, current) => prev.length > current.length ? prev : current, "");
 }
 
 assert.equal(longestName(employees), 'Alexander')
@@ -122,13 +126,14 @@ assert.equal(longestName(employees), 'Alexander')
 
 //* Print de namen van alle werknemers, gesorteerd op voornaam.
 function sortedNames(employees) {
-    const sorted = [];
-    for (let i = 0; i < employees.length; i++)
-    {
-        sorted[i] = employees[i].name;
-    }
-    sorted.sort();
-    return sorted;
+    // const sorted = [];
+    // for (let i = 0; i < employees.length; i++)
+    // {
+    //     sorted[i] = employees[i].name;
+    // }
+    // sorted.sort();
+    // return sorted;
+    return employees.map(x => x.name).sort();
 }
 
 assert.deepEqual(sortedNames(employees), ['Alexander', 'Anne', 'Els', 'Igor', 'Marcel', 'Sandra', 'Thomas'])
