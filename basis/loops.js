@@ -7,7 +7,7 @@ for (let i = 0; i <= 100; i++)
 // grootste getal uit een lijst
 function getLargest(arguments)
 {
-    let largest = 0;
+    let largest = arguments[0];
     for (let i = 0; i < arguments.length; i++)
     {
         if (arguments[i] > largest)
