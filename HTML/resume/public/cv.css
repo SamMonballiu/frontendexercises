@@ -3,6 +3,7 @@ body {
     font-weight:lighter;
     margin-left:20px;
     margin-right:50px;
+    width:90%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -12,7 +13,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p, blockquote, li {
     font-weight:400;
-    text-align:justify;
+    /* text-align:justify; */
 }
 
 .kolom
@@ -43,7 +44,7 @@ p, blockquote, li {
 
 li
 {
-    list-style-type:none;
+    list-style-type:circle;
     margin-top:3px;
     /* font-style: oblique; */
     /* margin-bottom: -10px; */
@@ -63,7 +64,7 @@ img {
 
 .headerItem{
     margin-left:10px;
-    font-size:1.4em;
+    font-size:1.2em;
     font-weight:600;
 }
 
