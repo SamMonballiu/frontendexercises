@@ -1,0 +1,52 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:lighter
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    /* font-weight:lighter; */
+}
+
+p, blockquote, li {
+    font-weight:400;
+}
+
+.kolom
+{
+    width:33%;
+    display: inline-block;
+    margin: auto;
+    vertical-align: text-top;
+}
+
+.hoofding
+{
+    text-align: center;
+    border-bottom: 1px black solid;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+li
+{
+    list-style-type:none;
+    margin-top:3px;
+    /* font-style: oblique; */
+    /* margin-bottom: -10px; */
+}
+
+.border1px {
+    border: 1px black solid;
+}
+
+.inline {
+    display: inline;
+}
+
+.headerItem{
+    margin-left:10px;
+    font-size:1.4em;
+    font-weight:600;
+}
+
