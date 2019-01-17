@@ -4,6 +4,9 @@ body {
     margin-left:20px;
     margin-right:50px;
     width:90%;
+    background-image: url("images/back2.jpg");
+    background-attachment:fixed;
+    
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,12 +16,21 @@ h1, h2, h3, h4, h5, h6 {
 
 p, blockquote, li {
     font-weight:400;
+    font-size:80%;
     /* text-align:justify; */
+}
+
+.container{
+    margin: auto;
+    border: 1px black solid;
+    padding:30px;
+    width:70%;
+    background:white;
 }
 
 .kolom
 {
-    width:33%;
+    width:35%;
     display: inline-block;
     margin: auto;
     vertical-align: text-top;
@@ -44,7 +56,7 @@ p, blockquote, li {
 
 li
 {
-    list-style-type:circle;
+    list-style-type:initial;
     margin-top:3px;
     /* font-style: oblique; */
     /* margin-bottom: -10px; */
