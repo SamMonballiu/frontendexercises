@@ -1,13 +1,5 @@
 require('./index.css'); /*adds content of index.css in JS */
-
-
-// const para = document.createElement("PARAGRAPH");
-// para.appendChild(document.createTextNode("hello world"));
-// document.getElementById("root").appendChild(para);
-
-// append text node to document body
-// document.body.appendChild(
-//     document.createTextNode("hello world"));
+const crel = require('crel') /* (first do 'add yarn crel') equiv. of 'using crel;' */
 
 const heading = document.createElement("h1");
 heading.id = "testId";
@@ -37,34 +29,43 @@ const inbox = [
 
 
 
-function renderArticle(message){
-    const messageView = document.createElement("li"); // make a listitem to go in the unordered list
-    const headerView = document.createElement("h2"); // make header, then insert message subject
-    headerView.appendChild(document.createTextNode(message.subject));
+function renderMessage(message){
+    // const messageView = document.createElement("li"); // make a listitem to go in the unordered list
+    // const headerView = document.createElement("h2"); // make header, then insert message subject
+    // headerView.appendChild(document.createTextNode(message.subject));
 
-    const fromView = document.createElement("h3"); // make from field (as h3), insert message author
-    fromView.appendChild(document.createTextNode("From: " + message.from));
+    // const fromView = document.createElement("h3"); // make from field (as h3), insert message author
+    // fromView.appendChild(document.createTextNode("From: " + message.from));
 
-    const messageBodyView = document.createElement("p"); // make body paragraph, insert message body
-    messageBodyView.appendChild(document.createTextNode(message.body));
+    // const messageBodyView = document.createElement("p"); // make body paragraph, insert message body
+    // messageBodyView.appendChild(document.createTextNode(message.body));
 
-    messageView.appendChild(headerView); // append header, author and body to listitem
-    messageView.appendChild(fromView);
-    messageView.appendChild(messageBodyView);
-    messageView.className = "messageContainer"; // css trickery
+    // messageView.appendChild(headerView); // append header, author and body to listitem
+    // messageView.appendChild(fromView);
+    // messageView.appendChild(messageBodyView);
+    // messageView.className = "messageContainer"; // css trickery
+
+    const messageView = crel('li',
+        { 'class': "messageContainer"},
+        crel('h2', message.subject),
+        crel('h3', message.from),
+        crel('p', message.body),
+    );
 
     return messageView;
 }
 
-
-
 function renderInbox(inbox) {
-    const inboxView = document.createElement("ul"); // make unordered list that will contain messages as listitems
-    for (let i = 0; i < inbox.length; i++)
-    {
-        const messageView = renderArticle(inbox[i]); // make a listitem, fill it with the message details
-        inboxView.appendChild(messageView); // add the listitem to the unordered list
-    }
+    // //const inboxView = document.createElement("ul"); // make unordered list that will contain messages as listitems
+    // const inboxView = crel("ul");
+    // for (let i = 0; i < inbox.length; i++)
+    // {
+    //     const messageView = renderMessage(inbox[i]); // make a listitem, fill it with the message details
+    //     inboxView.appendChild(messageView); // add the listitem to the unordered list
+    // }
+    // return inboxView;
+
+    const inboxView = crel("ul", inbox.map(renderMessage));
     return inboxView;
 }
 
