@@ -12,9 +12,7 @@ require('./index.css'); /*adds content of index.css in JS */
 const heading = document.createElement("h1");
 heading.id = "testId";
 heading.appendChild(document.createTextNode("Hello World"));
-document.body.appendChild(heading);
-
-//document.getElementById("testId").textContent += "!!"
+document.getElementById("root").appendChild(heading);
 
 const inbox = [
     {
@@ -33,15 +31,16 @@ const inbox = [
       subject: 
     "Meeting details for Sat 19/01", 
     from: "Shift supervisor", 
-    body: "Hey we're meeting up next saturday to discuss flower pots.Bring your a-game!"
+    body: "Hey we're meeting up next saturday to discuss flower pots. Everybody bring your A game!"
     },
 ];
 
-for (let i = 0; i <= inbox.length; i++)
-{
-    try {
-        const inboxView = document.createElement("div");
+const inboxView = document.createElement("ul");
 
+
+for (let i = 0; i < inbox.length; i++)
+{
+        const messageView = document.createElement("li");
         const headingView = document.createElement("h2");
         headingView.appendChild(document.createTextNode(inbox[i].subject));
     
@@ -51,18 +50,11 @@ for (let i = 0; i <= inbox.length; i++)
         const messageBodyView = document.createElement("p");
         messageBodyView.appendChild(document.createTextNode(inbox[i].body));
     
-        inboxView.appendChild(headingView);
-        inboxView.appendChild(fromView);
-        inboxView.appendChild(messageBodyView);
-        inboxView.className = "messageContainer";
-    
-        
-        document.body.appendChild(inboxView);
-    }
-
-    catch(err) {
-
-    }
-    
-    
+        messageView.appendChild(headingView);
+        messageView.appendChild(fromView);
+        messageView.appendChild(messageBodyView);
+        messageView.className = "messageContainer";
+        inboxView.appendChild(messageView);
 }
+
+document.getElementById("root").appendChild(inboxView);

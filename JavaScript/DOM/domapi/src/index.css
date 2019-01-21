@@ -24,3 +24,11 @@ code {
   border-right: 2px solid #ddd;
   border-bottom: 2px solid #ddd
 }
+
+ul {
+  list-style: none;
+}
+
+li {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
