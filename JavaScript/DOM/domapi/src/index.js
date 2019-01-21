@@ -9,13 +9,15 @@ document.getElementById("root").appendChild(heading);
 const inbox = [
     {
       subject: "What's happening", 
-      from: "waldo", 
+      from: "Waldo", 
+      email: "waldo@emerson.com",
       body: "I'm trapped inside my PC, hjälp" 
     },
 
     {
       subject: "Make your p33n larger", 
       from: "Totalegit Pharmacy", 
+      email: "totalegit@notshady.gov",
       body: "you know..."
     },
 
@@ -23,6 +25,7 @@ const inbox = [
       subject: 
     "Meeting details for Sat 19/01", 
     from: "Shift supervisor", 
+    email: "supervisor@workplace.official",
     body: "Hey we're meeting up next saturday to discuss flower pots. Everybody bring your A game!"
     },
 ];
@@ -48,7 +51,8 @@ function renderMessage(message){
     const messageView = crel('li',
         { 'class': "messageContainer"},
         crel('h2', message.subject),
-        crel('h3', message.from),
+        crel('h3', "From: " + message.from),
+        crel('a', {href: "mailto:" + message.email }, message.email),
         crel('p', message.body),
     );
 
@@ -66,6 +70,7 @@ function renderInbox(inbox) {
     // return inboxView;
 
     const inboxView = crel("ul", inbox.map(renderMessage));
+    console.log('render inbox: ', inbox, inboxView);
     return inboxView;
 }
 
