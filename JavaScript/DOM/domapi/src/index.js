@@ -38,20 +38,20 @@ const inbox = [
 
 
 function renderArticle(message){
-    const messageView = document.createElement("li");
-    const headerView = document.createElement("h2");
+    const messageView = document.createElement("li"); // make a listitem to go in the unordered list
+    const headerView = document.createElement("h2"); // make header, then insert message subject
     headerView.appendChild(document.createTextNode(message.subject));
 
-    const fromView = document.createElement("h3");
+    const fromView = document.createElement("h3"); // make from field (as h3), insert message author
     fromView.appendChild(document.createTextNode("From: " + message.from));
 
-    const messageBodyView = document.createElement("p");
+    const messageBodyView = document.createElement("p"); // make body paragraph, insert message body
     messageBodyView.appendChild(document.createTextNode(message.body));
 
-    messageView.appendChild(headerView);
+    messageView.appendChild(headerView); // append header, author and body to listitem
     messageView.appendChild(fromView);
     messageView.appendChild(messageBodyView);
-    messageView.className = "messageContainer";
+    messageView.className = "messageContainer"; // css trickery
 
     return messageView;
 }
@@ -59,11 +59,11 @@ function renderArticle(message){
 
 
 function renderInbox(inbox) {
-    const inboxView = document.createElement("ul");
+    const inboxView = document.createElement("ul"); // make unordered list that will contain messages as listitems
     for (let i = 0; i < inbox.length; i++)
     {
-        const messageView = renderArticle(inbox[i]);
-        inboxView.appendChild(messageView);
+        const messageView = renderArticle(inbox[i]); // make a listitem, fill it with the message details
+        inboxView.appendChild(messageView); // add the listitem to the unordered list
     }
     return inboxView;
 }
