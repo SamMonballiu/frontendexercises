@@ -35,26 +35,38 @@ const inbox = [
     },
 ];
 
-const inboxView = document.createElement("ul");
 
 
-for (let i = 0; i < inbox.length; i++)
-{
-        const messageView = document.createElement("li");
-        const headingView = document.createElement("h2");
-        headingView.appendChild(document.createTextNode(inbox[i].subject));
-    
-        const fromView = document.createElement("h3");
-        fromView.appendChild(document.createTextNode("From: " + inbox[i].from));
-    
-        const messageBodyView = document.createElement("p");
-        messageBodyView.appendChild(document.createTextNode(inbox[i].body));
-    
-        messageView.appendChild(headingView);
-        messageView.appendChild(fromView);
-        messageView.appendChild(messageBodyView);
-        messageView.className = "messageContainer";
-        inboxView.appendChild(messageView);
+function renderArticle(message){
+    const messageView = document.createElement("li");
+    const headerView = document.createElement("h2");
+    headerView.appendChild(document.createTextNode(message.subject));
+
+    const fromView = document.createElement("h3");
+    fromView.appendChild(document.createTextNode("From: " + message.from));
+
+    const messageBodyView = document.createElement("p");
+    messageBodyView.appendChild(document.createTextNode(message.body));
+
+    messageView.appendChild(headerView);
+    messageView.appendChild(fromView);
+    messageView.appendChild(messageBodyView);
+    messageView.className = "messageContainer";
+
+    return messageView;
 }
 
-document.getElementById("root").appendChild(inboxView);
+
+
+function renderInbox(inbox) {
+    const inboxView = document.createElement("ul");
+    for (let i = 0; i < inbox.length; i++)
+    {
+        const messageView = renderArticle(inbox[i]);
+        inboxView.appendChild(messageView);
+    }
+    return inboxView;
+}
+
+const view = renderInbox(inbox);
+document.getElementById("root").appendChild(view);

@@ -18,9 +18,10 @@ code {
 {
   margin-bottom:12px;
   background:#fff;
-  padding:12px;
+  padding:12px 40px;
   border-radius: 20px;
   width:66%;
+  min-width: 300px;
   border-right: 2px solid #ddd;
   border-bottom: 2px solid #ddd
 }
