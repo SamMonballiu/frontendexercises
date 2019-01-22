@@ -52,13 +52,23 @@ function handleClick(event)
     let containerArticles = [];
     for (let i = 0; i < articles.length; i++)
     {
-        if (Object.is(articles[i].parentElement.parentElement, parent))
+        if (Object.is(articles[i].parentElement, parent))
         {
             containerArticles.push(articles[i]);
         }
     }
 
+    let containerNavlinks = [];
+    for (let i = 0; i < navlinks.length; i++)
+    {
+        if (Object.is(navlinks[i].parentElement.parentElement, parent))
+        {
+            containerNavlinks.push(navlinks[i]);
+        }
+    }
+
     console.log(containerArticles);
+    console.log(containerNavlinks);
 
     if (event.target.nodeName.toLowerCase() !== "a") { return;} // don't do anything if the thing we clicked isn't a link (<a>)
     if (event.target.hash.length === 0) // handle links that go off the page. Those don't need to be looked up in the dictionary because they are not in it
@@ -70,7 +80,7 @@ function handleClick(event)
 
     // make all articles invisible (add .noDisplay css class) and strip all css classes from link in nav-bar (unselect all)
     makeAllInvisible(containerArticles);
-    removeCssClasses(navlinks);
+    removeCssClasses(containerNavlinks);
 
     event.target.classList.add("selected");
 
@@ -112,7 +122,7 @@ function makeAllInvisible(articles)
 {
     for (let i = 0; i < articles.length; i ++)
     {
-        articles[i].className += " noDisplay";
+        articles[i].classList.add("noDisplay");
     }
 }
 
