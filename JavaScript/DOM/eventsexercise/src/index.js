@@ -45,6 +45,21 @@ document.addEventListener('click', handleClick, false);
 function handleClick(event)
 {
     console.log('clicked: ', arguments);
+
+    const parent = event.target.parentElement.parentElement;
+    console.log(parent);
+
+    let containerArticles = [];
+    for (let i = 0; i < articles.length; i++)
+    {
+        if (Object.is(articles[i].parentElement.parentElement, parent))
+        {
+            containerArticles.push(articles[i]);
+        }
+    }
+
+    console.log(containerArticles);
+
     if (event.target.nodeName.toLowerCase() !== "a") { return;} // don't do anything if the thing we clicked isn't a link (<a>)
     if (event.target.hash.length === 0) // handle links that go off the page. Those don't need to be looked up in the dictionary because they are not in it
     {
@@ -54,7 +69,7 @@ function handleClick(event)
     }
 
     // make all articles invisible (add .noDisplay css class) and strip all css classes from link in nav-bar (unselect all)
-    makeAllInvisible(articles);
+    makeAllInvisible(containerArticles);
     removeCssClasses(navlinks);
 
     event.target.classList.add("selected");
