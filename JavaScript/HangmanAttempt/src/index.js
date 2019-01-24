@@ -25,7 +25,7 @@ const words = [
 ];
 
 const word = words[Math.floor(Math.random()*words.length)]; // pick word from list
-
+console.log(word);
 
 document.body.appendChild(crel('h2', 'Guess the word!'));
 
@@ -114,7 +114,6 @@ function handleClick(event){
             handleWinState();
         }
     }
-    
 }
 
 function handleWinState() {
@@ -127,12 +126,8 @@ function handleWinState() {
 
 function noClassListContains(elements, cssClass) {
     for (let i = 0; i < elements.length; i++) {
-
         const list = [].slice.apply(elements[i].classList);
-        console.log(elements[i] + ": Looking at " + list);
-
         if (list.includes(cssClass)) {
-            console.log(elements[i].textContent + " is " + cssClass)
             return false;
         }
     }
