@@ -36,7 +36,6 @@ document.body.appendChild(lettersDiv);
 const buttonsDiv = crel('div');
 document.body.appendChild(buttonsDiv);
 
-
 // add a button to buttonsDiv for every letter of the alphabet
 for (let i = 0; i < alphabet.length; i++) {
     const newButton = crel('button', alphabet[i]);
@@ -44,8 +43,6 @@ for (let i = 0; i < alphabet.length; i++) {
     newButton.classList.add("neutralbackground");
     buttonsDiv.appendChild(newButton);
 }
-
-
 
 // add a <p> to lettersDiv for every letter in the word
 for (let i = 0; i < word.length; i++) {
@@ -109,6 +106,7 @@ function handleClick(event){
             }
         }
 
+        // if there are no more invisible letters, that means every letter has been guessed (throw a party)
         if (noClassListContains(lettersDiv.children, "invisible"))
         {
             handleWinState();
@@ -122,7 +120,6 @@ function handleWinState() {
     finalDiv.appendChild(newGameButton);
     document.body.removeChild(buttonsDiv);
 }
-
 
 function noClassListContains(elements, cssClass) {
     for (let i = 0; i < elements.length; i++) {
