@@ -2,6 +2,7 @@ require ('./index.css');
 const crel = require('crel');
 
 let calculationMade = false;
+const operators = "*/-+";
 
 // get the div that has 'root' id
 const root = document.getElementById('root');
@@ -116,10 +117,8 @@ function handleButtonClick(event) {
     // if what is on the display right now is the result of a calculation, 
             // AND we either pressed a number key, OR the display currently shows the word "ERROR",
             // erase the display first, then carry on
-    if ((numbers.includes(buttonText) && buttonText != "⇦" 
-        || display.textContent === "ERROR" )
-        && calculationMade
-        )  {
+    if ((numbers.includes(buttonText) && buttonText != "⇦" || display.textContent === "ERROR" )
+        && calculationMade)  {
         display.textContent="";
     }
 
@@ -148,6 +147,11 @@ function handleButtonClick(event) {
         return;
     }
 
+    // don't let the user type a 0 as the first digit (it seems to crash eval, eg. eval(02.35 + 2) will crash)
+    if (display.textContent === "-0" || display.textContent === "0") {
+        return;
+    }
+
     // decimals: add a decimal point, but only in these cases:
             // - there are no decimals yet, AND there are no operators (+, -, /, *) on the display yet
             // - there is a decimal already, but there is also an operator already, so we are on the second number and the decimal point can be safely placed
@@ -161,64 +165,54 @@ function handleButtonClick(event) {
             }
         }
         display.textContent += ".";
+        calculationMade = false;
         return;
     }
 
-    // operators: if you click the plus, minus, multiply or divide buttons,
-            // check if there's already an operator in the display, if so: refuse to place another one
-                    // unless the one already in there is a minus (for instance if the display reads "-64")
-            
-            // if not, add it to the display
-            // and switch calculationMade to false
-    if (containsOperator(buttonText)) {
-
-        console.log('clicked operator');
-        if (display.textContent === "" && buttonText !== "-") {
-            console.log("can't insert operator here")
-            return;
-        }
-
-        console.log("current: " + display.textContent)
-
-        if (containsOperator(display.textContent)) {
-            console.log('operator already in string');
-            evaluate();
-            display.textContent += buttonText;
-        }
-
-        else {
-            display.textContent +=  buttonText;
-        }
+        display.textContent += buttonText;
+    
+    // if there's two operators in the display, and the first one ISN'T minus (belonging to a negative number)
+    // do the operation, put the result in the display, then add the last operator
+    let maxOperators = 0;
+    if (display.textContent[0] === '-') {
+        maxOperators = 2;
+        console.log(" ");
+        console.log('char in first position is -')
+        console.log("Operators in text: " + countOperators(display.textContent));
+        console.log("Max operators: " + maxOperators);
+    }
+    else { 
+        maxOperators = 1;
     }
 
-    else {
+    if (countOperators(display.textContent) > maxOperators ) {
+        console.log('trimming last char then evaluating')
+        display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+
+        evaluate();
         display.textContent += buttonText;
     }
 
+    // switch calculationMade to false, because if we've gotten to this stage, we've started work on a new calculation
+    // so we don't need to clear the display before we type new stuff in
     calculationMade = false;
 }
 
 // HELPER FUNCTIONS
 
-function containsOperator(text) {
-    const operators = "*/-+.";
-
-    return Array.from(text).reduce((x,y) => operators.includes(x) ? x : y).length == 0
+function countOperators(text) {
+    return Array.from(text).reduce((x,y) => operators.includes(x) ? x : y).length
 }
 
-// older version
-// function containsOperator(text)
-// {
-//     const operators = "*/-+.";
+function countOperators(text) {
+    let counter = 0;
+    for (let i = 0; i < text.length; i ++)
+    {
+        if (operators.includes(text[i])) { counter++;}
+    }
 
-//     for (let i = 0; i < operators.length; i ++){
-//         if (text.includes(operators[i])) {
-//             return true;
-//         }
-//     }
-
-//     return false;
-// }
+    return counter;
+}
 
 function getFirstIndexOfOperator(text)
 {
@@ -236,6 +230,7 @@ function getFirstIndexOfOperator(text)
 function evaluate()
 {
     try {
+        console.log("Evaluating the following: " + display.textContent);
         console.log(eval(display.textContent));
         display.textContent = eval(display.textContent);
         calculationMade = true;

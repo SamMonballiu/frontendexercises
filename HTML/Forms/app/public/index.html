@@ -25,29 +25,33 @@
     <title>React App</title>
   </head>
   <body>
-    <form action="/profile/change-password" method="post">
-      <div>
-        <input type="button" value="👁" id="btnShowPasswords">
-      </div>
-
-      <div>
-          <label for="oldpassword">Old password:</label>
-          <input type="password" id="old_password" class="hidden-password" name="old_password" value="test"> <!-- no closing tags -->
-      </div>
-
-      <div>
-          <label for="newpassword">New password:</label>
-          <input type="password" id="new_password" class="hidden-password" name="new_password" value="test">
-      </div>
-
-      <div>
-        <label for="confirm">Confirm:</label>
-        <input type="password" id="confirm_password" class="hidden-password" name="confirm_password" value="test">
-    </div>
+      <form id="passwordForm" action="/profile/change-password" method="post">
+        <div>
+          <input type="button" value="👁" id="btnShowPasswords" class="eye-button-off">
+        </div>
     
-      <div>
-          <button type="submit">Submit</button>
-      </div>
-  </form>
-  </body>
+        <div>
+          <label for="oldpassword">Old password:</label>
+          <input type="password" id="old_password" class="hidden-password" name="old_password"> <!-- no closing tags -->
+        </div>
+    
+        <div>
+          <label for="newpassword">New password:</label>
+          <input type="password" id="new_password" class="hidden-password" name="new_password">
+        </div>
+    
+        <div>
+          <label for="confirm">Confirm:</label>
+          <input type="password" id="confirm_password" class="hidden-password" name="confirm_password">
+        </div>
+    
+        <div id="errorDiv">
+    
+        </div>
+    
+        <div>
+          <button type="submit" disabled id="submit-button">Submit</button>
+        </div>
+      </form>
+    </body>
 </html>

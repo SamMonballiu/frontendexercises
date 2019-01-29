@@ -56,3 +56,39 @@ button {
      between the labels and their text fields */
   margin-left: .5em;
 }
+
+.eye-button-on {
+  width:54px;
+  padding-bottom:10px;
+  color: cornflowerblue;
+  background: rgb(213, 228, 255);
+  font-size:2em;
+  border:none;
+  border-radius:60px;
+  cursor: pointer;
+}
+/* 
+.eye-button-on:focus {
+  border-radius:80px;
+}
+
+.eye-button-off:focus {
+  border-radius:80px;
+} */
+
+.eye-button-off {
+  width:54px;
+  padding-bottom:10px;
+  color: #aaa;
+  background: #eee;
+  font-size:2em;
+  border:none;
+  border-radius:80px;
+  cursor: pointer;
+}
+
+#errorDiv {
+  font-weight: 600;
+  color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
