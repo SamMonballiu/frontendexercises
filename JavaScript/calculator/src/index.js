@@ -1,7 +1,10 @@
 require ('./index.css');
 const crel = require('crel');
 
+let calculationMade = false;
+
 const root = document.getElementById('root');
+root.classList.add('strobe');
 const buttonDiv = crel('div');
 buttonDiv.classList.add('flex');
 
@@ -9,9 +12,9 @@ const display = crel('p',);
 const displayDiv = crel('div', display);
 displayDiv.classList.add('displayDiv');
 
+
 root.appendChild(displayDiv);
 root.appendChild(buttonDiv);
-
 
 const buttonBackspace = crel('button', '⇦');
 buttonBackspace.classList.add('numberButton');
@@ -24,6 +27,12 @@ buttonCE.classList.add('doubleWidth');
 const specialButtonsDiv = crel('div', buttonCE, buttonBackspace);
 specialButtonsDiv.classList.add('flex');
 root.appendChild(specialButtonsDiv);
+
+const seasickButton = crel('button', 'Disable sea sick mode');
+seasickButton.classList.add('seasickBtn');
+const seasickDiv = crel('div', seasickButton);
+root.appendChild(seasickDiv);
+
 
 const buttonOne = crel('button', '1');
 const buttonTwo = crel('button', '2');
@@ -42,8 +51,6 @@ const buttonAdd = crel('button', '+');
 const buttonSubtract = crel('button', '-');
 const buttonMultiply = crel('button', '*');
 const buttonDivide = crel('button', '/');
-
-
 
 const numberButtons = crel('div', 
     buttonSeven,
@@ -81,38 +88,47 @@ root.addEventListener('click', handleButtonClick)
 
 function handleButtonClick(event) {
     if (event.target.tagName !== "BUTTON") { return;}    
-    if (display.textContent === "ERROR") {
-        display.textContent ="";
-    }
+    const numbers = "0123456789";
 
     const buttonText = event.target.textContent;
     
+    if ((numbers.includes(buttonText) && buttonText != "CE" && buttonText != "⇦" 
+        || display.textContent === "ERROR" )
+        && calculationMade
+        )  {
+        display.textContent="";
+    }
+
+    if (buttonText === "Disable sea sick mode") {
+        root.classList.remove('strobe');
+        root.removeChild(seasickDiv);
+        return;
+    }
+
     // CE button
     if (buttonText === "CE") {
-        console.log("yaaaay");
         display.textContent = "";
         return;
     }
 
     // backspace
     if (buttonText === "⇦") {
-        console.log("backspace");
         display.textContent = display.textContent.substring(0, display.textContent.length-1);
         return;
     }
 
     // equals
     if (buttonText === "=") {
-        console.log('equals');
-        
         evaluate();
         return;
     }
 
     // decimals
     if (buttonText === ",") {
-        if (contains(display.textContent, ",")) {
-            if (getLastCharacter(display.textContent) === ".") {
+        
+        if (display.textContent.includes(".")) {
+            if (display.textContent.indexOf(",") > getFirstIndexOfOperator(display.textContent)) 
+            {
                 return;
             }
         }
@@ -120,7 +136,8 @@ function handleButtonClick(event) {
         return;
     }
 
-    if (!containsOperator(buttonText)) {
+    // operators
+    if (containsOperator(buttonText)) {
 
         console.log('clicked operator');
         if (display.textContent === "" && buttonText !== "-") {
@@ -128,7 +145,9 @@ function handleButtonClick(event) {
             return;
         }
 
-        if (!containsOperator(display.textContent)) {
+        console.log("current: " + display.textContent)
+
+        if (containsOperator(display.textContent)) {
             console.log('operator already in string');
             evaluate();
             display.textContent += buttonText;
@@ -136,28 +155,42 @@ function handleButtonClick(event) {
 
         else {
             display.textContent +=  buttonText;
+            calculationMade = false;
         }
     }
 
     else {
         display.textContent += buttonText;
+        calculationMade = false;
     }
-
 }
 
 function containsOperator(text)
 {
-    console.log("is operator? " + text);
-    const operators = ['*', '/', '-', '+',];
-    for (let i = 0; i < text.Length; i ++){
-        console.log(text[i]);
-        if (operators.includes(text[i]))
-        {
-            return false;
+    const operators = "*/-+.";
+
+    for (let i = 0; i < operators.length; i ++){
+        if (text.includes(operators[i])) {
+            return true;
         }
     }
-    return true;
+
+    return false;
 }
+
+function getFirstIndexOfOperator(text)
+{
+    const operators = "*/-+.";
+
+    for (let i = 0; i < operators.length; i ++){
+        if (text.includes(operators[i])) {
+            return text.indexOf(operators[i]);
+        }
+    }
+
+    return false;
+}
+
 
 function getLastCharacter(string) {
     return string[string.length];
@@ -165,6 +198,7 @@ function getLastCharacter(string) {
 
 function contains(text, character){
     for (let i = 0; i < text.length; i++) {
+        console.log('looking at character:' + text[i]);
         if (text[i] === character) {
             return true;
         }
@@ -177,10 +211,12 @@ function evaluate()
     try {
         console.log(eval(display.textContent));
         display.textContent = eval(display.textContent);
+        calculationMade = true;
     }
-
+    
     catch {
         display.textContent = "ERROR";
     }
+    
 }
 

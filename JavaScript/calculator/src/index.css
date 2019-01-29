@@ -1,5 +1,6 @@
 body {
-  margin: 0;
+  margin: auto;
+  width: 50%;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -57,3 +58,42 @@ p {
   padding-top: 36px;
   min-height:60px;
 }
+
+.strobe {
+  transform-origin: bottom;
+  animation: strobeStart 4s ease-out, strobe 2s infinite;
+  animation-delay: 0s, 4s;
+}
+
+@keyframes strobeStart {
+  0% {
+    transform:  skew(0deg,0deg) scaleY(1) ;
+    animation-timing-function: ease-in;
+   }
+  40% {
+    transform:  skew(0deg,0deg) scaleY(.9);
+    animation-timing-function: ease-out;
+  }
+  100% { transform:   skew(4deg,0deg) scaleX(1); }
+}
+
+@keyframes strobe {
+  0% { transform:   skew(4deg,0deg) scaleX(1); }
+  10% { transform:  skew(1deg,0deg) scaleY(.9) ; }
+  50% { transform:  skew(-4deg,0deg) scaleX(1); }
+  60% { transform:  skew(-1deg,0deg) scaleY(.9) ; }
+  100% {transform: skew(4deg,0deg) scaleX(1); }
+}
+
+.seasickBtn {
+  background: cornflowerblue;
+  color: white;
+  font-size: 1.2em;
+  border: none;
+  padding:20px;
+}
+
+.seasickBtn:hover {
+  background:dodgerblue;
+}
+
