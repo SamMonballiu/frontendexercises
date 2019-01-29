@@ -26,11 +26,13 @@ root.appendChild(buttonDiv);
 const buttonCE = crel('button', 'CE');
 buttonCE.classList.add('numberButton');
 buttonCE.classList.add('doubleWidth');
+buttonCE.classList.add('redHover');
 
 // create equals button, add CSS classes
 const buttonEquals = crel('button', '=');
 buttonEquals.classList.add('numberButton');
 buttonEquals.classList.add('doubleWidth');
+buttonEquals.classList.add('equalsBtn');
 
 // create div for double-wide buttons (CE & Equals), add to root
 const doubleWideButtonsDiv = crel('div', buttonCE, buttonEquals);
@@ -57,6 +59,7 @@ const buttonNine = crel('button', '9');
 const buttonZero= crel('button', '0');
 const buttonDecimal = crel('button', ',');
 const buttonBackspace = crel('button', '⮘');
+buttonBackspace.classList.add('redHover');
 
 // create buttons to put in the operatorButtons div
 const buttonAdd = crel('button', '+');

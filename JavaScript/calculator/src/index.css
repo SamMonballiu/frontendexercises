@@ -99,3 +99,11 @@ p {
   background:dodgerblue;
 }
 
+.equalsBtn:hover {
+  background: #baebae;
+}
+
+.redHover:hover {
+  background: #f6a3a3;
+}
+
