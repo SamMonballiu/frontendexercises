@@ -26,7 +26,7 @@ function doValidation(event) {
     }
     
     else if (newpassword.value !== confirm.value && newpassword.value !== "" && confirm.value !== "") {
-        errors.push("Error: please confirm your passsword (passwords do not match).");
+        errors.push("Error: please confirm your password (passwords do not match).");
     }
 
     showErrors(errors);

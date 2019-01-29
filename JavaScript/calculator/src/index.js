@@ -41,10 +41,10 @@ doubleWideButtonsDiv.classList.add('flex');
 root.appendChild(doubleWideButtonsDiv);
 
 // create sea sick mode div & buttons, add to root
-const seasickButton = crel('button', 'Disable sea sick mode');
+const seasickButton = crel('button', 'Disable seasick mode');
 seasickButton.classList.add('seasickBtn');
-const seasickDiv = crel('div', seasickButton);
-root.appendChild(seasickDiv);
+const seasickDiv = document.getElementById("seasick");
+seasickDiv.appendChild(seasickButton);
 
 
 // create buttons to put in the numberButtons div
@@ -106,6 +106,17 @@ buttonDiv.appendChild(operatorButtons);
 
 // add event listener to the root div
 root.addEventListener('click', handleButtonClick)
+seasickButton.addEventListener('click', removeSeaSick);
+
+function removeSeaSick(event) {
+    // special case for sea sick mode button
+    if (event.target.textContent === "Disable seasick mode") {
+        console.log('huh');
+        root.classList.remove('strobe');
+        document.body.removeChild(document.getElementById('seasick'));
+        return;
+    }
+}
 
 function handleButtonClick(event) {
     // do nothing if we clicked something other than a button
@@ -122,12 +133,7 @@ function handleButtonClick(event) {
         display.textContent="";
     }
 
-    // special case for sea sick mode button
-    if (buttonText === "Disable sea sick mode") {
-        root.classList.remove('strobe');
-        root.removeChild(seasickDiv);
-        return;
-    }
+    
 
     // CE button: clear display
     if (buttonText === "CE") {
@@ -148,9 +154,13 @@ function handleButtonClick(event) {
     }
 
     // don't let the user type a 0 as the first digit (it seems to crash eval, eg. eval(02.35 + 2) will crash)
-    if (display.textContent === "-0" || display.textContent === "0") {
-        return;
+    if (display.textContent === "-" || display.textContent === "") {
+        if (buttonText === "0") {
+            return;
+        }
     }
+
+    
 
     // decimals: add a decimal point, but only in these cases:
             // - there are no decimals yet, AND there are no operators (+, -, /, *) on the display yet
