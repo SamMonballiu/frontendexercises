@@ -112,8 +112,7 @@ code {
   max-width:400px;
   background:rgb(250, 250, 250);
   border: 1px solid transparent;
-  overflow:hidden;
-  text-overflow:clip;
+  overflow:auto;
 }
 
 .equalsBtn:hover {
