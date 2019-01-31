@@ -227,7 +227,6 @@ function handleKeyDown(event)
         // clear everything
         case "delete":
             display.textContent = "";
-            calculationMade = true;
             break;
     }
 
