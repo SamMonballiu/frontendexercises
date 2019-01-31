@@ -79,21 +79,22 @@ code {
   color: white;
   font-size: 1.2em;
   border: rgba(86, 118, 177, 0.3) 1px solid;
-  border-bottom: rgb(80, 117, 185) 8px solid;
+  border-bottom: rgb(80, 117, 185) 4px solid;
   padding:6px 30px; 
   border-radius: 10px;
   outline:none;
 }
 
 #help h1 {
-  color:rgb(183, 218, 255);
+  color:rgb(149, 188, 229);
   font-size:2.4em;
-  text-shadow: 2px 2px 2px #999;
+  font-weight:700;
+  text-shadow: 2px 2px 2px #eee;
 }
 
 #help button:active {
   border: rgba(86, 118, 177, 0.3) 1px solid;
-  transform: translateY(8px);
+  transform: translateY(4px);
 }
 
 #help button:hover {

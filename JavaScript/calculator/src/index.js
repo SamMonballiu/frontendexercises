@@ -127,7 +127,6 @@ seasickButton.addEventListener('click', removeSeaSick);
 function removeSeaSick(event) {
     // special case for sea sick mode button
     if (event.target.textContent === "Disable seasick mode") {
-        console.log('huh');
         root.classList.remove('strobe');
         document.body.removeChild(document.getElementById('seasick'));
         return;
@@ -181,14 +180,7 @@ function handleButtonClick(event) {
             // BUG: you can add as many decimals as you want as long as there is an operator in the text...
     if (buttonText === ",") {
         
-        if (display.textContent.includes(".")) {
-            if (display.textContent.indexOf(",") > getFirstIndexOfOperator(display.textContent)) 
-            {
-                return;
-            }
-        }
-        display.textContent += ".";
-        calculationMade = false;
+        addDecimalToDisplay();
         return;
     }
 
@@ -237,12 +229,7 @@ function handleKeyDown(event)
         // decimal
         case ".":
         case ",":
-            if (display.textContent.includes(".")) {
-                if (display.textContent.indexOf(",") > getFirstIndexOfOperator(display.textContent)) {
-                    return;
-                }
-            }
-            display.textContent += ".";
+            addDecimalToDisplay();
             break;
 
         // evaluate
@@ -302,6 +289,21 @@ function addOperatorToDisplay(operator) {
     }
 }
 
+function addDecimalToDisplay()
+{
+    console.log("OPERATORS:" + countOperators(display.textContent));
+        console.log("DECIMALS: " + countDecimals(display.textContent));
+        
+        if (countDecimals(display.textContent) > countOperators(display.textContent)) {
+            return;
+        }
+        
+        else {
+            display.textContent += ".";
+            calculationMade = false;
+        }
+}
+
 function arrayContainsElement(array, element){
     for (let i = 0; i < array.length; i++) {
         if (array[i] === element) {
@@ -318,6 +320,15 @@ function countOperators(text) {
         if (operators.includes(text[i])) { counter++;}
     }
 
+    return counter;
+}
+
+function countDecimals(text) {
+    let counter = 0;
+    for (let i = 0; i < text.length; i ++)
+    {
+        if (text[i] === ".") { counter++;}
+    }
     return counter;
 }
 
