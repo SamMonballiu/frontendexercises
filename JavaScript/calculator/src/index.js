@@ -24,7 +24,7 @@ help.appendChild(buttonGotIt);
 
 // get the div that has 'root' id
 const root = document.getElementById('root');
-root.classList.add('strobe');
+//root.classList.add('strobe');
 
 // create a div to hold the buttons, give it appropriate CSS class
 const buttonDiv = crel('div');
@@ -56,12 +56,6 @@ buttonEquals.classList.add('equalsBtn');
 const doubleWideButtonsDiv = crel('div', buttonCE, buttonEquals);
 doubleWideButtonsDiv.classList.add('flex');
 root.appendChild(doubleWideButtonsDiv);
-
-// create sea sick mode div & buttons, add to root
-const seasickButton = crel('button', 'Disable seasick mode');
-seasickButton.classList.add('seasickBtn');
-const seasickDiv = document.getElementById("seasick");
-seasickDiv.appendChild(seasickButton);
 
 // create buttons to put in the numberButtons div
 const buttonOne = crel('button', '1');
@@ -122,16 +116,6 @@ buttonDiv.appendChild(operatorButtons);
 
 // add event listener to the root div
 root.addEventListener('click', handleButtonClick)
-seasickButton.addEventListener('click', removeSeaSick);
-
-function removeSeaSick(event) {
-    // special case for sea sick mode button
-    if (event.target.textContent === "Disable seasick mode") {
-        root.classList.remove('strobe');
-        document.body.removeChild(document.getElementById('seasick'));
-        return;
-    }
-}
 
 // button click handler
 function handleButtonClick(event) {
@@ -220,6 +204,8 @@ function handleKeyDown(event)
 {
     console.log(event.key)
 
+    if (calculationMade && !operators.includes(event.key)) { display.textContent = ""}
+
     switch (event.key.toLowerCase()) {
         // backspace
         case "backspace":
@@ -236,6 +222,7 @@ function handleKeyDown(event)
         case "enter":
             document.activeElement.blur();
             evaluateCalculation();
+            
             break;
         // clear everything
         case "delete":
@@ -253,9 +240,8 @@ function handleKeyDown(event)
     }
 
     if (arrayContainsElement("+-*/", event.key)) {
-        console.log('Key pressed: ' + event.key);
         addOperatorToDisplay(event.key);
-    }
+        }
 }
 
 
@@ -263,14 +249,10 @@ function handleKeyDown(event)
 
 function addOperatorToDisplay(operator) {
     console.log('inserting operator ' + operator);
-    
+    display.textContent += operator;
     let maxOperators = 0;
     if (display.textContent[0] === '-') {
         maxOperators = 2;
-        console.log(" ");
-        console.log('char in first position is -')
-        console.log("Operators in text: " + countOperators(display.textContent));
-        console.log("Max operators: " + maxOperators);
     }
     else { 
         maxOperators = 1;
@@ -283,10 +265,7 @@ function addOperatorToDisplay(operator) {
         evaluateCalculation();
         display.textContent += operator;
     }
-
-    else {
-        display.textContent += operator;
-    }
+    calculationMade = false;
 }
 
 function addDecimalToDisplay()
@@ -347,20 +326,58 @@ function getFirstIndexOfOperator(text)
 
 function evaluateCalculation()
 {
+    const lastChar = display.textContent[display.textContent.length-1];
+    console.log(lastChar);
+
+    if (operators.includes(lastChar))
+    {
+        display.textContent = display.textContent.substring(0, display.textContent.length - 1);
+    }
+
     try {
         console.log("Evaluating the following: " + display.textContent);
-        console.log(eval(display.textContent));
-        display.textContent = eval(display.textContent);
+
+        let operatorPosition = getFirstIndexOfOperator(display.textContent);
+        const firstNum = display.textContent.substring(0, operatorPosition);
+        const secondNum = display.textContent.substring(operatorPosition+1);
+
+        console.log("First num: " + firstNum)
+        console.log("Second num: " + secondNum);
+        console.log("Operator: " + display.textContent[operatorPosition]);
+
+        let result = 0;
+        switch (display.textContent[operatorPosition])
+        {
+            case "*":
+            result = Number(firstNum) * Number(secondNum);
+            break;
+
+            case "/":
+            result = Number(firstNum) / Number(secondNum);
+            break;
+
+            case "+":
+            result = Number(firstNum) + Number(secondNum);
+            break;
+
+            case "-":
+            result = Number(firstNum) - Number(secondNum);
+            break;
+
+            default:
+                break;
+        }
+
+        display.textContent = result;
     }
     
-    catch {
+    catch(err) {
+        console.log(err);
         display.textContent = "ERROR";
     }
 
     finally {
         calculationMade = true;
     }
-
-    
 }
 
