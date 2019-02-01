@@ -175,17 +175,12 @@ function handleButtonClick(event) {
     let maxOperators = 0;
     if (display.textContent[0] === '-') {
         maxOperators = 2;
-        console.log(" ");
-        console.log('char in first position is -')
-        console.log("Operators in text: " + countOperators(display.textContent));
-        console.log("Max operators: " + maxOperators);
     }
     else { 
         maxOperators = 1;
     }
 
     if (countOperators(display.textContent) > maxOperators ) {
-        console.log('trimming last char then evaluating')
         display.textContent = display.textContent.substring(0, display.textContent.length - 1);
 
         evaluateCalculation();
@@ -266,7 +261,6 @@ function addOperatorToDisplay(operator) {
     }
 
     if (countOperators(display.textContent) > maxOperators ) {
-        console.log('trimming last char then evaluating')
         display.textContent = display.textContent.substring(0, display.textContent.length - 1);
 
         evaluateCalculation();
@@ -277,17 +271,14 @@ function addOperatorToDisplay(operator) {
 
 function addDecimalToDisplay()
 {
-    console.log("OPERATORS:" + countOperators(display.textContent));
-        console.log("DECIMALS: " + countDecimals(display.textContent));
-        
-        if (countDecimals(display.textContent) > countOperators(display.textContent)) {
-            return;
-        }
-        
-        else {
-            display.textContent += ".";
-            calculationMade = false;
-        }
+    if (countDecimals(display.textContent) > countOperators(display.textContent)) {
+        return;
+    }
+
+    else {
+        display.textContent += ".";
+        calculationMade = false;
+    }
 }
 
 function arrayContainsElement(array, element){
@@ -334,8 +325,7 @@ function getFirstIndexOfOperator(text)
 function evaluateCalculation()
 {
     const lastChar = display.textContent[display.textContent.length-1];
-    console.log(lastChar);
-
+    
     if (operators.includes(lastChar))
     {
         display.textContent = display.textContent.substring(0, display.textContent.length - 1);
