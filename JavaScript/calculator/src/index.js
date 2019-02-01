@@ -204,7 +204,13 @@ function handleKeyDown(event)
 {
     console.log(event.key)
 
-    if (calculationMade && !operators.includes(event.key)) { display.textContent = ""}
+    if (calculationMade && (
+            !(operators.includes(event.key)) 
+            || event.key.toLowerCase() == "backspace"
+            || event.key == "." ))
+        { 
+            display.textContent = ""
+        }
 
     switch (event.key.toLowerCase()) {
         // backspace
@@ -237,6 +243,7 @@ function handleKeyDown(event)
             }
         }
         display.textContent += event.key;
+        calculationMade = false;
     }
 
     if (arrayContainsElement("+-*/", event.key)) {
