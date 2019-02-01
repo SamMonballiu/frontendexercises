@@ -3,10 +3,10 @@ const crel = require('crel');
 
 document.title="Hangman";
 
-const bar = document.getElementById('myBar');
-
 const revealString = "Reveal the word";
 const newGameString = "Play again";
+
+let score = 9;
 
 // declare the alphabet
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -60,6 +60,8 @@ const words = [
 const word = words[Math.floor(Math.random()*words.length)]; // pick word from list
 console.log(word);
 
+const wrongGuesses = [];
+
 document.body.appendChild(crel('h2', 'Guess the word!'));
 
 var lettersDiv = crel('div');
@@ -87,8 +89,14 @@ const finalDiv = crel('div');
 const revealButton = crel('button', revealString);
 const newGameButton = crel('button', newGameString);    
 
+
+const scoreLabel = (crel('label', score));
+const scoreDiv = crel('div', scoreLabel);
+
 //finalDiv.appendChild(revealButton);
 document.body.appendChild(finalDiv);
+document.body.appendChild(scoreDiv);
+updateScore();
 
 // add event listener to the document
 document.addEventListener('click', handleClick, false);
@@ -122,10 +130,19 @@ function handleClick(event){
     // get the letter from the button that was clicked
     const letter = event.target.textContent;
 
-    // bad guess: make the button red
+    // bad guess: make the button red, subtract a point from the score
     if (!word.includes(letter)){
         
+        if (wrongGuesses.includes(letter)) { return;}
+
         event.target.classList.add("redbackground");
+        wrongGuesses.push(letter);
+        console.log(wrongGuesses);
+        score--;
+        updateScore();
+        if (score == 0) {
+            handleLoseState()
+        };
     }
 
     // good guess: make correctly guessed letters visible, make button green
@@ -147,11 +164,28 @@ function handleClick(event){
     }
 }
 
+function updateScore() {
+    
+    const guess = score == 1 ? "guess" : "guesses";
+    scoreLabel.textContent = "You have " + score + " " + guess+ " left.";
+}
+
 function handleWinState() {
     const header = crel('h3', 'You guessed the word!');
     finalDiv.appendChild(header);
     finalDiv.appendChild(newGameButton);
     document.body.removeChild(buttonsDiv);
+    document.body.removeChild(scoreDiv);
+}
+
+function handleLoseState() {
+    const header = crel('h3', "You didn't guess the word in time...");
+    const solutionDiv = crel('div', "The word was: " + word);
+    finalDiv.appendChild(header);
+    finalDiv.appendChild(solutionDiv);
+    finalDiv.appendChild(newGameButton);
+    document.body.removeChild(buttonsDiv);
+    document.body.removeChild(scoreDiv);
 }
 
 function noClassListContains(elements, cssClass) {
