@@ -3,7 +3,7 @@ body {
     font-weight:lighter;
     margin-left:20px;
     margin-right:50px;
-    width:90%;
+    width:75%;
     background-image: url("images/back2.jpg");
     background-attachment:fixed;
     
@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5, h6 {
     /* font-weight:lighter; */
 }
 
+h2 {
+    margin-top:30px;
+}
+
 p, blockquote, li {
     font-weight:400;
     font-size:80%;
@@ -22,11 +26,68 @@ p, blockquote, li {
 
 .container{
     margin: auto;
-    border: 1px black solid;
+    
     padding:30px;
     width:70%;
     background:white;
 }
+
+.black-border {
+    border: 1px black solid;
+}
+
+.display-none {
+    display:none;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.page-margin {
+    margin-left: 40px;
+}
+
+.print-friendly h1 {
+    font-size:1.8em;
+}
+
+.print-friendly h2 {
+    font-size:1.2em;
+}
+
+.print-friendly a {
+    text-decoration:none;
+    color:black;
+}
+
+.print-friendly h3 {
+    font-size:.9em;
+}
+
+.print-friendly img {
+    height: 96px;
+    width: 96px;    
+}
+
+@media print {
+    .pagebreakbefore {
+        page-break-before: always;
+        margin-top:100px;
+    }
+
+    .pagebreakbefore::after {
+        width:80%;
+        content:"cv Samson Monballiu";
+        font-size: .8em;
+        border-top: 1px solid #bbb;
+        position:fixed;
+        bottom:30px;
+    }
+
+  }
+
+  
 
 .kolom
 {
@@ -76,7 +137,7 @@ img {
 
 .headerItem{
     margin-left:10px;
-    font-size:1.2em;
-    font-weight:600;
+    font-size:1.0em;
+    font-weight:500;
 }
 

@@ -4,10 +4,16 @@
 <head>
   <link rel="stylesheet" type="text/css" href="cv.css">
   <title>Curriculum Vitae - Samson Monballiu</title>
+  <script src="index.js"></script>
 </head>
 
 <body>
-  <div class="container">
+  <div id="body-container" class="container black-border">
+    
+    <div id="button-container">
+      <button type="button" id="button-printer-friendly">Print</button>
+    </div>
+
     <div>
       <h1 class="hoofding">Curriculum Vitae - Samson Monballiu</h1>
     </div>
@@ -15,7 +21,7 @@
 
     <div>
       <div class="kolom" style="width:auto; padding:10px; padding-top:0px;">
-        <img class="border1px " src="images/cookieMonster.jpg" />
+        <img class="border1px " height="128" src="images/cookieMonster.jpg" />
       </div>
       <div class="kolom" id="test">
         <h3>Adres</h3>
@@ -49,10 +55,10 @@
         <h2>Opleidingen</h2>
         <article>
           <ul>
-            <li><strong>1995 - 2000:</strong> ASO Menswetenschappen - Koninklijk Atheneum Vijverhof Sint-Michiels</li>
-            <li><strong>2000 - 2004:</strong> Management Assistant - Howest, campus Simon Stevin (2de jaar behaald)</li>
-            <li><strong>2011 - 2012:</strong> Voltijdse dagopleiding Fotografie + bedrijfsbeheer - Syntra West Brugge</li>
             <li><strong>2018 - 2019:</strong> Software developer .Net - Intec Brussel</li>
+            <li><strong>2011 - 2012:</strong> Voltijdse dagopleiding Fotografie + bedrijfsbeheer - Syntra West Brugge</li>
+            <li><strong>2000 - 2004:</strong> Management Assistant - Howest, campus Simon Stevin (2de jaar behaald)</li>
+            <li><strong>1995 - 2000:</strong> ASO Menswetenschappen - Koninklijk Atheneum Vijverhof Sint-Michiels</li>
           </ul>
         </article>
       </div>
@@ -63,6 +69,7 @@
         <article>
           <ul>
             <li>C# Advanced (LINQ, events, multithreading)</li>
+            <li>Unit Testing (NUnit, xUnit)</li>
             <li>Windows Presentation Foundation</li>
             <li>WinForms</li>
             <li>JavaScript</li>
@@ -79,7 +86,7 @@
         </article>
       </div>
 
-      <div>
+      <div class="pagebreakbefore">
         <h2>Ervaring</h2>
 
         <p class="inline headerItem">Assistent, Fotografie Lommée </p>
@@ -91,7 +98,6 @@
             klaarzetten van bestellingen;</li>
           <li>opvolgen en aanvullen van inkt- en papiervoorraad</li>
         </ul>
-
         <p class="inline headerItem">Setfotografie / algemene assistentie / digitale beeldbewerking, Alex Verhaest </p>
         <p class="inline">(2012 - 2014)</p>
         <ul>
