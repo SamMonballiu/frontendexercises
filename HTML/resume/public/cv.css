@@ -10,8 +10,12 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     /* font-weight:lighter; */
+}
+
+h4 {
+    margin-bottom:-8px;
 }
 
 h2 {
@@ -24,11 +28,21 @@ p, blockquote, li {
     /* text-align:justify; */
 }
 
+a {
+    text-decoration:none;
+    font-weight: bold;
+    color: black;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
 .container{
     margin: auto;
-    
     padding:30px;
     width:70%;
+    min-width:700px;
     background:white;
 }
 
@@ -70,6 +84,10 @@ p, blockquote, li {
     width: 96px;    
 }
 
+.link-list{
+    margin-left:-20px;
+}
+
 @media print {
     .pagebreakbefore {
         page-break-before: always;
@@ -83,6 +101,17 @@ p, blockquote, li {
         border-top: 1px solid #bbb;
         position:fixed;
         bottom:30px;
+    }
+
+    a {
+        font-weight:normal;
+    }
+
+    .portfolio-links a[href]:after{
+        font-weight: normal;
+        content: "\a (" attr(href) ")";
+        white-space: pre;
+        font-size : .8em;
     }
 
   }
