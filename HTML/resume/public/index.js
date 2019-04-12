@@ -23,10 +23,12 @@ function makePrinterFriendly()
 {
     document.body.style.background = 'none';
     const container = document.getElementById('body-container');
+    
     buttonDiv.classList.add('display-none');
     container.classList.remove('black-border');
     container.classList.add('width-100');
     container.classList.add('page-margin');
     container.classList.add('print-friendly');
+
     window.print();
 }
