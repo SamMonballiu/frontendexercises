@@ -1,10 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
   <link rel="stylesheet" type="text/css" href="cv.css">
   <title>Curriculum Vitae - Samson Monballiu</title>
   <script src="index.js"></script>
+<script language="javascript">
+
+console.log("running");
+const button = document.getElementById('button-printer-friendly');
+const buttonDiv = document.getElementById('button-container');
+const container = document.getElementById('body-container');
+
+button.addEventListener('click', makePrinterFriendly);
+
+
+function makePrinterFriendly()
+{
+    document.body.style.background = 'none';
+    const container = document.getElementById('body-container');
+    
+    buttonDiv.classList.add('display-none');
+    container.classList.remove('black-border');
+    container.classList.add('width-100');
+    container.classList.add('page-margin');
+    container.classList.add('print-friendly');
+
+    window.print();
+}
+</script>
+
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
@@ -258,14 +283,13 @@
           <h3>Extra troeven</h3>
           <ul style="font-size:1.2em">
             <li>
-              Analoge en digitale fotografie
+            <b>Portretfotografie</b> (analoog en digitaal) staat me toe om op een empatische manier om te gaan met mensen, en de fotobewerking nadien laat me toe om mijn foto's tot in de puntjes en met oog voor detail af te werken.
             </li>
-            <li>
-              Digitale beeldbewerking (Lightroom en Photoshop)
-            </li>
+	    <li>
+		<b>Muziek</b> is een tweede passie: gitaar spelen en muziek maken met drie vrienden laat me toe om in groep creatief bezig te zijn, en de regelmatige optredens helpen me te leren omgaan met stress-situaties.
+	    </li>
           </ul>
       </div>
-
 
       <!-- TALEN -->
       <div>
@@ -300,7 +324,24 @@
           </tr>
         </table>
       </div>
-<!-- 
+
+
+<div>
+	<h3>Referenties</h3>
+<ul style="font-size:1.2em">
+<li>
+	<b>Kenan Kurda</b> (docent .Net Intec): <a href="mailto:kenankurda@gmail.com">kenan.kurda@intecbrussel.be</a><br/>
+
+
+
+</li>
+	<li>
+	<b>Cindy Pipeleers</b> (tewerkstellingsconsulent Intec):<a href="cindy.pipeleers@intecbrussel.be">cindy.pipeleers@intecbrussel.be</a>
+</li>
+</ul>
+</div>
+
+<!--
       <div class="pagebreakbefore">
         </div> -->
         
